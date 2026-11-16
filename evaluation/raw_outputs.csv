@@ -1,0 +1,710 @@
+test_id,prompt_version,scenario,output_1,output_2
+TC01,V1,Basic Python interview,"**Question 1:**  
+Can you explain the difference between an array and a linked list, and give an example of when you might choose one over the other?",
+TC02,V1,AI/ML role relevance,"Great! Let’s dive in.
+
+**Question 1:**  
+*Can you explain the difference between **bias** and **variance** in a machine learning model, and how you would address each if you observed high bias or high variance during training?*",
+TC03,V1,HR interview,"Great! Let’s get started.
+
+**Question 1:**  
+*Can you tell me a bit about yourself and why you’re interested in a Software Development Intern position at our company?*",
+TC04,V1,One question at a time,"**Technical Interview – Beginner Software Development Intern**
+
+**Question 1:**  
+Write a Python function named `sum_even_numbers` that takes a list of integers as its argument and returns the sum of all even numbers in that list.  
+
+*Example:*  
+```python
+sum_even_numbers([1, 2, 3, 4, 5])  # should return 6 (2 + 4)
+```
+
+Feel free to explain your approach or any assumptions you make.",
+TC05,V1,Incomplete answer,"**Evaluation**
+
+| Criterion | Assessment |
+|-----------|------------|
+| **Correctness** | The statement is technically true but overly simplistic. |
+| **Relevance** | Directly addresses the question. |
+| **Clarity** | Very clear, but lacks depth. |
+| **Completeness** | Missing key concepts (data, models, algorithms, training, evaluation). |
+
+**Score: 3/10**
+
+**Justification:**  
+You captured the core idea that machines “learn,” but the answer omits the essential components that define machine learning: data, models, training processes, and evaluation. A more complete answer would explain how algorithms learn patterns from data and make predictions or decisions.
+
+---
+
+### Strengths
+- **Concise** – you got to the point quickly.
+- **Correct** – computers do learn in ML.
+
+### Missing Points
+- **Data** – the input that drives learning.
+- **Models/Algorithms** – the mathematical structures that learn.
+- **Training** – the process of adjusting model parameters.
+- **Evaluation** – how we measure success (accuracy, loss, etc.).
+- **Applications** – examples (image recognition, recommendation systems).
+
+---
+
+### Suggested Improved Answer
+> “Machine learning is a subfield of artificial intelligence where we build algorithms that can learn patterns from data. Instead of programming explicit rules, we provide the system with examples (training data) and let it adjust its internal parameters to make predictions or decisions. The process involves selecting a model (e.g., linear regression, neural network), training it on labeled or unlabeled data, and evaluating its performance on unseen data. Applications range from image and speech recognition to recommendation engines and autonomous vehicles.”
+
+---
+
+### Follow‑up Question
+What are the main steps involved in a typical machine‑learning workflow, and why is each step important?",
+TC06,V1,Valid alternative explanation,"**Evaluation**
+
+- **Correctness (3/3):** The answer correctly states that a Python list is an ordered collection that can hold multiple values and is mutable.
+- **Relevance (2/2):** The response directly addresses the question.
+- **Clarity (2/2):** The wording is clear and concise.
+- **Completeness (1/3):** The answer is missing several key details that are commonly expected when defining a Python list.
+
+**Score: 8/10**
+
+**Strengths**
+- Accurately identifies that a list is ordered.
+- Mentions that it can store multiple values.
+- Notes that lists are mutable (can be modified).
+
+**Missing Points**
+- The fact that lists can hold elements of **any data type** (heterogeneous).
+- That elements are **indexed** starting at 0.
+- Common operations (e.g., indexing, slicing, appending, removing).
+- Mention of list **methods** (e.g., `append()`, `pop()`, `extend()`, `insert()`, `remove()`, `sort()`, `reverse()`).
+- The dynamic nature of lists (size can change).
+- That lists are implemented as dynamic arrays in CPython, giving O(1) average‑time access.
+
+**Suggested Improved Answer**
+
+> A Python list is an **ordered, mutable sequence** that can hold elements of **any data type** (strings, numbers, objects, even other lists). Elements are **indexed** starting at 0, and you can access, slice, or modify them using standard indexing syntax. Lists are **dynamic arrays**, so they can grow or shrink as you add or remove items. Common list methods include `append()`, `pop()`, `extend()`, `insert()`, `remove()`, `sort()`, and `reverse()`. Because they are mutable, you can change the contents of a list after it’s created.
+
+**Follow‑up Question**
+
+> Can you give an example of how you would add an element to a list and then remove the last element? What methods would you use?",
+TC07,V1,Irrelevant answer,"**Evaluation**
+
+| Criterion | Assessment |
+|-----------|------------|
+| **Correctness** | 0/10 – The answer does not address supervised learning at all. |
+| **Relevance** | 0/10 – The response is unrelated to the question. |
+| **Clarity** | 0/10 – The statement is clear but irrelevant. |
+| **Completeness** | 0/10 – No explanation of supervised learning concepts is provided. |
+
+**Score:** **0/10**  
+*Justification:* The answer fails to answer the question in any meaningful way.
+
+---
+
+### Strengths
+- The student’s response is concise and easy to understand (though not relevant).
+
+### Missing Points
+- Definition of supervised learning.
+- Key components: labeled data, training, model, loss function, evaluation metrics.
+- Examples of supervised learning algorithms (e.g., linear regression, decision trees, SVM, neural networks).
+- Typical use‑cases (classification, regression).
+
+---
+
+### Suggested Better Answer
+
+> **Supervised learning** is a type of machine‑learning task where the algorithm learns a mapping from input features to output labels using a labeled dataset.  
+> 1. **Training data**: Each example consists of an input vector \(x\) and a target label \(y\).  
+> 2. **Model**: A function \(f_\theta(x)\) parameterized by \(\theta\) (e.g., weights in a neural network).  
+> 3. **Loss function**: Measures the discrepancy between predictions \(f_\theta(x)\) and true labels \(y\) (e.g., mean‑squared error for regression, cross‑entropy for classification).  
+> 4. **Optimization**: Adjust \(\theta\) (often via gradient descent) to minimize the loss over the training set.  
+> 5. **Evaluation**: Use a separate validation/test set to assess generalization, reporting metrics such as accuracy, precision, recall, or RMSE.  
+>  
+> **Common algorithms**: Linear regression, logistic regression, decision trees, random forests, support vector machines, and deep neural networks.  
+> **Typical applications**: Spam detection, image classification, house‑price prediction, medical diagnosis, etc.
+
+---
+
+### Follow‑up Question
+
+> Can you explain the difference between **classification** and **regression** problems in supervised learning, and give an example of each?",
+TC08,V1,No previous work experience,"**Evaluation**
+
+- **Correctness:** 10/10 – The statement is factually accurate if the student truly has no formal work experience.  
+- **Relevance:** 8/10 – It directly answers the question, but it doesn’t provide any additional context that could help the interviewer understand the student’s background.  
+- **Clarity:** 10/10 – The answer is concise and unambiguous.  
+- **Completeness:** 4/10 – The answer is too brief; it misses opportunities to highlight related experiences (projects, internships, volunteer work, coursework, or extracurriculars) that demonstrate relevant skills.
+
+**Score:** 6/10  
+*Justification:* The answer is correct and clear but lacks depth. In an HR interview, you want to turn a “no experience” situation into a showcase of transferable skills and enthusiasm.
+
+---
+
+### Strengths
+- Directly addresses the question.
+- Shows honesty and self‑awareness.
+
+### Missing Points
+- **Related experiences:** Projects, hackathons, open‑source contributions, or coursework that involved teamwork, problem‑solving, or coding.
+- **Transferable skills:** Communication, time management, leadership, or any soft skills gained through school clubs, sports, or volunteer work.
+- **Motivation & goals:** Why you’re interested in this internship and what you hope to learn.
+
+---
+
+### Suggested Improved Answer
+
+> “I don’t have formal work experience yet, but I’ve been actively building my skills through a number of projects and extracurricular activities. For example, I completed a full‑stack web application for a local non‑profit, which involved designing the database, implementing the API in Node.js, and creating a responsive front‑end with React. I also participated in a hackathon where my team built a real‑time data visualization tool; that experience taught me how to collaborate under tight deadlines and debug quickly. Additionally, I serve as the president of the university’s coding club, where I organize workshops and mentor junior students. These experiences have helped me develop strong coding, teamwork, and communication skills, and I’m excited to bring that energy to this internship.”
+
+---
+
+### Follow‑up Question
+
+> “Can you tell me about a specific project or activity that you’re most proud of, and what role you played in it?”",
+TC09,V1,Contextual follow-up,"**Evaluation**
+
+- **Correctness:** 10/10 – The definition captures the core idea of overfitting.
+- **Relevance & Clarity:** 9/10 – It’s concise and easy to understand.
+- **Completeness:** 7/10 – It misses a few key points (e.g., why it happens, how it relates to model capacity, and typical mitigation strategies).
+
+**Score:** 8/10  
+*You nailed the main concept, but a richer answer would show deeper understanding.*
+
+**Strengths**
+- Clear, direct definition.
+- Highlights the training vs. generalization gap.
+
+**Missing Points**
+- Why overfitting occurs (model complexity, noise, limited data).
+- Typical symptoms (high training accuracy, low validation accuracy).
+- Common remedies (regularization, dropout, cross‑validation, early stopping, data augmentation).
+
+**Improved Answer Example**
+
+> Overfitting happens when a model learns the training data too well, capturing noise and idiosyncrasies rather than the underlying pattern. As a result, it achieves high accuracy on the training set but performs poorly on unseen data. This usually occurs when the model is too complex relative to the amount of data or when the data contain a lot of noise. Techniques such as regularization, dropout, cross‑validation, early stopping, and data augmentation are often used to mitigate overfitting.
+
+**Follow‑up Question**
+
+What are some common techniques you would use to prevent or reduce overfitting in a deep learning model?",
+TC10,V1,Scoring consistency,"**Evaluation**
+
+- **Correctness:** 9/10 – The answer correctly identifies that a list is ordered and mutable and that it can hold multiple elements.  
+- **Relevance:** 10/10 – All points directly address the question.  
+- **Clarity:** 9/10 – The sentence is concise and easy to understand.  
+- **Completeness:** 7/10 – It misses a few key details that are often expected in a full answer (e.g., that lists can hold elements of any type, support indexing/slicing, and are implemented as dynamic arrays).
+
+**Score:** **7/10**
+
+**Strengths**
+- Accurate description of order and mutability.
+- Mentions that multiple elements can be stored.
+
+**Missing Points**
+- Lists can contain elements of *any* type (heterogeneous).
+- They support indexing, slicing, and dynamic resizing.
+- Common operations (append, pop, etc.) and list comprehensions.
+- Implementation detail: dynamic array.
+
+**Better Version of the Answer**
+
+> In Python, a **list** is an ordered, mutable sequence type that can hold elements of any type (integers, strings, objects, even other lists). It is implemented as a dynamic array, so you can index, slice, and modify elements in place. Common operations include `append()`, `pop()`, `insert()`, and list comprehensions for concise construction.
+
+**Follow‑up Question**
+
+> Can you write a short code snippet that creates a list of the first five prime numbers and then removes the third element? What methods would you use?","**Evaluation**
+
+- **Correctness:** 9/10 – The answer correctly identifies that a list is ordered and mutable and that it can hold multiple elements.  
+- **Relevance:** 10/10 – All points directly address the question.  
+- **Clarity:** 9/10 – The sentence is concise and easy to understand.  
+- **Completeness:** 7/10 – It misses a few key details that are often expected in a full answer (e.g., that lists can hold elements of any type, that they are dynamic arrays, and that they support indexing, slicing, and many built‑in methods).
+
+**Score:** **7/10**
+
+---
+
+### Strengths
+- Accurate description of order and mutability.
+- Mentions that multiple elements can be stored.
+
+### Missing Points
+- Lists can contain elements of *any* type (heterogeneous).
+- They are implemented as dynamic arrays, so they can grow/shrink.
+- Support for indexing, slicing, and a rich set of methods (`append`, `extend`, `pop`, etc.).
+- Mention of list comprehensions as a common way to create lists.
+
+---
+
+### Suggested Improved Answer
+> In Python, a **list** is an ordered, mutable sequence type that can hold elements of any data type. Internally it is implemented as a dynamic array, so it can grow or shrink as needed. Lists support indexing, slicing, and a wide range of built‑in methods such as `append()`, `extend()`, `pop()`, and `remove()`. They are often created using square brackets `[]` or list comprehensions.
+
+---
+
+### Follow‑up Question
+> Can you give an example of creating a list with at least three different data types and show how to access the second element?"
+TC01,V2,Basic Python interview,"**Question (Software Development Intern – Beginner Level)**  
+
+Can you explain what a variable is in programming and give an example of how you would declare and use one in Python?",
+TC02,V2,AI/ML role relevance,"**Interview Question (AI/ML Engineer Intern – Intermediate, Technical)**  
+
+> **Explain how you would implement a simple gradient descent algorithm to minimize a convex loss function. What are the key steps, and how would you choose the learning rate?**  
+
+Please provide your answer.",
+TC03,V2,HR interview,"**HR Interview – Software Development Intern (Beginner)**  
+
+**Question 1:**  
+*Can you tell me about a time when you worked on a team project (in school, a club, or a personal project) and how you handled a disagreement or conflict within the team?*",
+TC04,V2,One question at a time,"**Question (Beginner Software Development Intern – Technical):**
+
+Can you explain what a *function* (or *method*) is in programming, and why we use functions instead of writing the same code repeatedly?",
+TC05,V2,Incomplete answer,"**Evaluation**
+
+| Criterion | Score (out of max) | Justification |
+|-----------|--------------------|---------------|
+| Correctness | 1/3 | The statement “computers learn” captures the core idea but omits key details (data, models, learning process). |
+| Relevance | 2/2 | The answer directly addresses the question. |
+| Clarity | 2/2 | The sentence is clear and unambiguous. |
+| Completeness | 1/3 | It lacks depth—no mention of data, algorithms, or the purpose of ML. |
+
+**Total Score:** **6/10**
+
+---
+
+### Strengths
+1. **Conciseness** – The answer is brief and to the point.  
+2. **Correct core idea** – It correctly identifies that ML involves computers learning.
+
+### Missing / Incorrect Concepts
+- **Data & Features** – ML relies on data to learn patterns.  
+- **Algorithms & Models** – Mention of learning algorithms (e.g., regression, neural nets).  
+- **Purpose** – ML is used for prediction, classification, clustering, etc.  
+- **Types of Learning** – Supervised, unsupervised, reinforcement learning.
+
+---
+
+### Suggested Improved Answer
+> “Machine learning is a branch of artificial intelligence that enables computers to learn patterns and make decisions from data without being explicitly programmed. By training algorithms on labeled or unlabeled data, the system builds a model that can predict outcomes, classify inputs, or discover hidden structures.”
+
+---
+
+### Follow‑up Question
+> “Can you explain the difference between supervised and unsupervised learning, and give an example of each?”",
+TC06,V2,Valid alternative explanation,"**Evaluation**
+
+| Criterion | Score (out of 10) |
+|-----------|-------------------|
+| Correctness | **3** |
+| Relevance | **2** |
+| Clarity | **2** |
+| Completeness | **2** |
+| **Total** | **9/10** |
+
+**Justification**
+
+- **Correctness (3/3):** The answer correctly identifies a list as an ordered, mutable collection that can hold multiple values.  
+- **Relevance (2/2):** It directly addresses the question.  
+- **Clarity (2/2):** The wording is concise and easy to understand.  
+- **Completeness (2/3):** The answer is missing a few key details that are commonly expected in a technical interview (e.g., that lists are built‑in Python objects, support indexing/slicing, can contain heterogeneous types, and are implemented as dynamic arrays).
+
+**Strengths**
+
+1. **Accurate core definition** – correctly states that a list is ordered and mutable.  
+2. **Concise and clear** – the response is straightforward and free of jargon.
+
+**Missing / Incorrect Concepts**
+
+- The fact that lists are a built‑in Python data type.  
+- That they support indexing, slicing, and other sequence operations.  
+- That they can hold elements of any type (heterogeneous).  
+- That they are implemented as dynamic arrays, allowing efficient append operations.
+
+**Suggested Improved Answer**
+
+> “In Python, a **list** is a built‑in, ordered, mutable sequence type. It can store elements of any type (heterogeneous), supports indexing and slicing, and is implemented as a dynamic array, which allows efficient appends and deletions at the end. Lists are created with square brackets, e.g., `my_list = [1, 'a', 3.14]`.”
+
+**Follow‑up Question**
+
+> “Can you explain the difference between a list and a tuple in Python, especially regarding mutability and typical use cases?”",
+TC07,V2,Irrelevant answer,"**Evaluation**
+
+| Criterion | Score (out of max) | Justification |
+|-----------|--------------------|---------------|
+| Correctness | 0/3 | The answer does not address supervised learning at all. |
+| Relevance | 0/2 | The response is unrelated to the question. |
+| Clarity | 0/2 | The statement is clear but irrelevant. |
+| Completeness | 0/3 | No explanation of supervised learning concepts is provided. |
+| **Total** | **0/10** | The answer fails to meet any of the evaluation criteria. |
+
+**Brief Justification**
+
+The student’s reply (“My favourite subject is cricket”) does not contain any information about supervised learning, so it scores zero on all criteria.
+
+**Strengths in the answer**
+
+1. The response is concise and easy to read.  
+2. The student used a personal statement, which shows willingness to share personal interests.
+
+**Missing or Incorrect Concepts**
+
+- Definition of supervised learning (learning from labeled data).  
+- Key components: training data, labels, model, loss function, training algorithm.  
+- Typical algorithms (e.g., linear regression, decision trees, SVM, neural networks).  
+- Evaluation metrics (accuracy, precision, recall, etc.).  
+- Example applications (image classification, spam detection, etc.).
+
+**Suggested Improved Answer**
+
+> **Supervised learning** is a type of machine‑learning paradigm where the algorithm learns a mapping from input features to output labels using a labeled training dataset.  
+> The process involves:  
+> 1. **Collecting labeled data** (e.g., images with class tags).  
+> 2. **Choosing a model** (e.g., linear regression, decision tree, neural network).  
+> 3. **Defining a loss function** that measures prediction error (e.g., mean‑squared error for regression, cross‑entropy for classification).  
+> 4. **Training** the model by minimizing the loss using an optimization algorithm (e.g., gradient descent).  
+> 5. **Evaluating** the trained model on a separate test set using metrics such as accuracy, precision, recall, or RMSE.  
+> Supervised learning is widely used for tasks like image classification, spam detection, and predicting house prices.
+
+**Follow‑up Question**
+
+> Can you give an example of a supervised learning problem and describe the steps you would take to build a model for it?",
+TC08,V2,No previous work experience,"**Evaluation**
+
+| Criterion | Score (out of 10) | Justification |
+|-----------|-------------------|---------------|
+| **Correctness / Authenticity** | 2/10 | The answer is honest, but it lacks any detail that demonstrates experience or effort. |
+| **Relevance** | 1/10 | It addresses the question, but it does not provide any useful information about the candidate’s background. |
+| **Clarity** | 2/10 | The statement is clear and concise. |
+| **Completeness** | 1/10 | The answer is very brief and omits any discussion of projects, coursework, volunteer work, or other relevant activities. |
+
+**Total Score:** **6/10**
+
+---
+
+### Strengths
+1. **Honesty** – The candidate is upfront about not having formal work experience.  
+2. **Clarity** – The response is straightforward and easy to understand.
+
+### Missing / Incorrect Concepts
+- **Lack of context** – No mention of academic projects, internships, part‑time jobs, volunteer work, or extracurricular activities that could showcase relevant skills.  
+- **No demonstration of initiative** – The answer does not highlight any self‑driven learning or problem‑solving experiences.  
+- **No connection to the role** – There’s no attempt to tie past experiences (even informal) to the responsibilities of a Software Development Intern.
+
+---
+
+### Suggested Improved Answer
+> “I haven’t had a formal full‑time job yet, but I’ve gained practical experience through several university projects and a part‑time role as a lab assistant. For example, I worked on a team project that built a web‑based inventory system using React and Node.js, where I was responsible for designing the REST API and implementing unit tests. I also volunteered as a coding tutor, helping peers understand data structures and algorithms. These experiences have helped me develop strong coding skills, teamwork, and problem‑solving abilities that I’m eager to bring to this internship.”
+
+---
+
+### Follow‑up Question
+> “Can you walk me through one of those projects—what was the goal, your role, and the outcome?”",
+TC09,V2,Contextual follow-up,"**Evaluation**
+
+| Criterion | Score (out of 10) | Justification |
+|-----------|-------------------|---------------|
+| Correctness | 3/3 | The answer correctly identifies the core symptom of overfitting. |
+| Relevance | 2/2 | Directly addresses the interview question. |
+| Clarity | 2/2 | The statement is concise and easy to understand. |
+| Completeness | 2/3 | The answer captures the symptom but omits why it occurs, how to detect it, and common mitigation strategies. |
+
+**Total Score:** 9/10
+
+**Strengths**
+1. **Concise definition** – The student succinctly captures the essence of overfitting.
+2. **Clear language** – The explanation is straightforward and free of jargon.
+
+**Missing / Incorrect Concepts**
+- **Causes** – Overfitting often arises from overly complex models, insufficient data, or noisy labels.
+- **Detection** – Mention of validation curves, cross‑validation, or learning curves.
+- **Mitigation** – Regularization, dropout, early stopping, data augmentation, etc.
+
+**Suggested Improved Answer**
+
+> “Overfitting occurs when a model learns the training data too well, capturing noise and idiosyncrasies rather than the underlying pattern. As a result, it performs excellently on the training set but poorly on unseen data. This typically happens with overly complex models, limited training data, or noisy labels. We detect it by comparing training and validation performance (e.g., a large gap in accuracy or loss). Common mitigation techniques include regularization (L1/L2), dropout, early stopping, cross‑validation, and augmenting the training set.”
+
+**Follow‑up Question**
+
+> “What are some common techniques to prevent or mitigate overfitting in machine learning models, and how do they work?”",
+TC10,V2,Scoring consistency,"**Evaluation**
+
+| Criterion | Score (out of 10) |
+|-----------|-------------------|
+| Correctness | 3 |
+| Relevance | 2 |
+| Clarity | 2 |
+| Completeness | 2 |
+| **Total** | **9/10** |
+
+**Justification**
+
+- **Correctness (3/3):** The answer accurately states that a Python list is ordered and mutable, and that it can hold multiple elements.  
+- **Relevance (2/2):** The response directly addresses the question without digression.  
+- **Clarity (2/2):** The wording is concise and easy to understand.  
+- **Completeness (2/3):** The answer covers the core properties but omits a few useful details (e.g., lists can hold heterogeneous types, support indexing/slicing, and are implemented as dynamic arrays).
+
+**Strengths**
+
+1. **Concise definition** – The answer is short yet hits the key points.  
+2. **Accurate description** – It correctly identifies order and mutability.
+
+**Missing / Incorrect Concepts**
+
+- The ability of lists to store elements of *any* type (heterogeneous).  
+- Mention that lists support indexing, slicing, and dynamic resizing.  
+- The fact that lists are implemented as dynamic arrays in CPython.
+
+**Suggested Improved Answer**
+
+> A Python list is an ordered, mutable sequence that can hold an arbitrary number of elements of any type. Internally it is implemented as a dynamic array, which allows fast indexing and slicing while automatically resizing as elements are added or removed. Lists can contain heterogeneous items (e.g., integers, strings, objects) and support a rich set of methods such as `append`, `extend`, `insert`, `pop`, and `remove`.
+
+**Follow‑up Question**
+
+> Can you explain how Python’s list implementation handles dynamic resizing when elements are appended? What is the amortized time complexity of `append`?","**Evaluation**
+
+| Criterion | Score (out of 10) |
+|-----------|-------------------|
+| Correctness | 3 |
+| Relevance | 2 |
+| Clarity | 2 |
+| Completeness | 2 |
+| **Total** | **9/10** |
+
+**Justification**
+
+- **Correctness (3/3):** The answer accurately states that a Python list is ordered and mutable, and that it can hold multiple elements.  
+- **Relevance (2/2):** The response directly addresses the question without digression.  
+- **Clarity (2/2):** The wording is concise and easy to understand.  
+- **Completeness (2/3):** The answer covers the core properties but omits a few useful details (e.g., lists can hold heterogeneous types, support indexing/slicing, and are implemented as dynamic arrays).
+
+**Strengths**
+
+1. **Concise definition** – The answer is short yet hits the key points.  
+2. **Accurate description** – It correctly identifies order and mutability.
+
+**Missing / Incorrect Concepts**
+
+- The ability of lists to store elements of *any* type (heterogeneous).  
+- Mention that lists support indexing, slicing, and dynamic resizing.  
+- The fact that lists are implemented as dynamic arrays in CPython.
+
+**Suggested Improved Answer**
+
+> A Python list is an ordered, mutable sequence that can hold an arbitrary number of elements of any type. Internally it is implemented as a dynamic array, which allows fast indexing and slicing while automatically resizing as elements are added or removed. Lists can contain heterogeneous items (e.g., integers, strings, objects) and support a rich set of methods such as `append`, `extend`, `insert`, `pop`, and `remove`.
+
+**Follow‑up Question**
+
+> Can you explain how Python’s list implementation handles dynamic resizing when elements are appended? What is the amortized time complexity of `append`?"
+TC01,V3,Basic Python interview,"**Question 1 (Technical – Beginner Level):**  
+*Can you explain what a linked list is and how it differs from an array?*",
+TC02,V3,AI/ML role relevance,"**Interview Question 1**
+
+*In a supervised learning project, you have a dataset with a mix of numerical and categorical features, and the target variable is a binary classification. Describe the steps you would take to preprocess the data and select an appropriate model. What considerations would guide your choice of model, and how would you evaluate its performance?*",
+TC03,V3,HR interview,"**HR Interview – Software Development Intern (Beginner)**  
+
+**Question 1:**  
+*Can you describe a project you worked on during your studies (or personal projects) and explain what role you played, what technologies you used, and what you learned from the experience?*",
+TC04,V3,One question at a time,"**Question 1 (Technical – Beginner Software Development Intern)**  
+Can you explain the difference between an array and a linked list, and give an example of when you might choose one over the other?",
+TC05,V3,Incomplete answer,"**Evaluation**
+
+| Criterion | Score (out of 10) | Comments |
+|-----------|-------------------|----------|
+| Correctness | 1/3 | The statement is technically true but lacks depth. |
+| Relevance | 1/2 | Directly addresses the question but is overly brief. |
+| Clarity | 1/2 | Easy to understand, but the answer is too vague. |
+| Completeness | 1/3 | Missing key concepts such as data, models, training, and evaluation. |
+| **Total** | **4/10** |  |
+
+**Explanation of the score**
+
+Your answer correctly identifies that machine learning involves computers learning, but it does not explain *how* they learn or *what* that learning entails. A complete answer should mention data, models, training, and evaluation, and ideally give examples of algorithms or applications.
+
+**Strengths**
+
+- The answer is concise and directly addresses the question.
+- It uses simple language that is easy to understand.
+
+**Missing or incorrect points**
+
+- No mention of data or training data.
+- No explanation of models or algorithms.
+- No reference to supervised/unsupervised learning or evaluation metrics.
+- Lacks examples of real‑world applications.
+
+**Suggested improved answer**
+
+> Machine learning is a subfield of artificial intelligence where computers improve their performance on a task by learning from data. Instead of being explicitly programmed for every possible scenario, a machine learning system is trained on a dataset, learns patterns or relationships, and then uses those patterns to make predictions or decisions on new, unseen data. Common approaches include supervised learning (e.g., classification, regression), unsupervised learning (e.g., clustering, dimensionality reduction), and reinforcement learning. Typical algorithms include linear regression, decision trees, support vector machines, neural networks, and k‑means clustering.
+
+**Follow‑up question**
+
+Can you elaborate on what you mean by “computers learn”? What does that learning process involve, and what are the key components (e.g., data, model, training, evaluation) that make it possible?",
+TC06,V3,Valid alternative explanation,"**Evaluation**
+
+| Criterion | Score (out of 10) | Comments |
+|-----------|-------------------|----------|
+| Correctness | 3/3 | The answer correctly identifies a list as an ordered, mutable collection that can hold multiple values. |
+| Relevance | 2/2 | Directly addresses the question. |
+| Clarity | 1/2 | The explanation is concise but could be clearer about key properties (e.g., dynamic sizing, indexing). |
+| Completeness | 2/3 | Lacks mention of important features such as indexing, slicing, and that lists can contain heterogeneous types. |
+
+**Total Score:** **8/10**
+
+---
+
+### Explanation of the Score
+- **Correctness (3/3):** The answer accurately describes a Python list as an ordered, mutable collection.
+- **Relevance (2/2):** The response stays on topic and directly answers the question.
+- **Clarity (1/2):** While the statement is understandable, it omits some details that would make the explanation more precise (e.g., indexing, dynamic resizing).
+- **Completeness (2/3):** The answer covers the basics but misses key aspects such as the ability to store heterogeneous types, indexing, slicing, and that lists are dynamic arrays.
+
+---
+
+### Strengths of the Answer
+- **Conciseness:** The response is brief and to the point.
+- **Accuracy:** Correctly identifies the primary characteristics of a list (ordered, mutable, can store multiple values).
+
+---
+
+### Missing or Incorrect Points
+- **Dynamic sizing:** Lists can grow or shrink as elements are added or removed.
+- **Indexing and slicing:** Elements can be accessed via indices and slices.
+- **Heterogeneous types:** Lists can contain elements of different data types.
+- **Built‑in methods:** Mention of common list methods (e.g., `append`, `pop`, `insert`) would demonstrate deeper understanding.
+
+---
+
+### Suggested Improved Answer
+> A Python list is an ordered, mutable sequence that can hold an arbitrary number of elements. It is implemented as a dynamic array, so it can grow or shrink as you add or remove items. Elements are accessed by zero‑based indices, and you can slice the list to obtain sub‑lists. Lists can contain heterogeneous types (e.g., integers, strings, objects) and provide many built‑in methods such as `append()`, `pop()`, `insert()`, `remove()`, and `sort()`.
+
+---
+
+### Follow‑up Question
+> Can you give an example of how you would add an element to a list and then retrieve the third element?",
+TC07,V3,Irrelevant answer,"**Total Score: 0 / 10**
+
+| Criterion | Score (out of max) | Notes |
+|-----------|--------------------|-------|
+| Correctness | 0 / 3 | The answer does not address supervised learning at all. |
+| Relevance | 0 / 2 | No mention of supervised learning concepts. |
+| Clarity | 0 / 2 | The statement is clear but irrelevant. |
+| Completeness | 0 / 3 | Lacks any explanation of supervised learning. |
+
+**Explanation of the Score**  
+The response fails to answer the question. It does not mention any supervised learning concepts such as labeled data, training, model evaluation, or typical algorithms. Therefore, it scores zero across all criteria.
+
+**Strengths of the Answer**  
+- The answer is concise and clearly stated.  
+- The student’s enthusiasm for cricket is evident.
+
+**Missing or Incorrect Points**  
+- No definition or explanation of supervised learning.  
+- No mention of key components (labels, training data, model, loss function).  
+- No examples of supervised learning algorithms (e.g., linear regression, decision trees, SVM).  
+- No discussion of evaluation metrics (accuracy, precision, recall).
+
+**Suggested Improved Answer**  
+> “Supervised learning is a type of machine learning where the model is trained on a labeled dataset. Each training example consists of an input feature vector and a corresponding target output. The goal is to learn a mapping from inputs to outputs that can generalize to unseen data. Common supervised learning algorithms include linear regression for regression tasks, logistic regression and support vector machines for classification, and decision trees or random forests for both. Model performance is typically evaluated using metrics such as accuracy, precision, recall, or mean squared error, depending on the task.”
+
+**Follow‑up Question**  
+What are the main differences between classification and regression in supervised learning, and can you give an example of each?",
+TC08,V3,No previous work experience,"**1. Total score: 6/10**  
+- Relevance: 1/3  
+- Clarity: 2/2  
+- Authenticity & Specificity: 2/2  
+- Completeness: 1/3  
+
+**2. Explanation of the score**  
+Your response was clear and honest, which is a strong start for an HR interview. However, the question asked for an overview of your previous work experience. By simply stating that you have no formal work experience, you left the interviewer without any insight into how you might bring value to the role. The answer lacks depth, examples, and any discussion of related projects, coursework, or volunteer work that could demonstrate relevant skills.
+
+**3. Strengths of the answer**  
+- **Clarity**: The answer was concise and easy to understand.  
+- **Authenticity**: You were honest about your lack of formal work experience, which builds trust.  
+
+**4. Missing or incorrect points**  
+- **Lack of detail**: No mention of any projects, coursework, internships, or volunteer activities that could serve as relevant experience.  
+- **No demonstration of skills**: The answer did not highlight any technical or soft skills you have developed.  
+- **No connection to the role**: There was no attempt to link your background to the responsibilities of a Software Development Intern.
+
+**5. Suggested improved answer**  
+> “While I haven’t had a formal paid position yet, I’ve gained practical experience through several projects and coursework that align closely with this internship. For example, in my senior year I led a team of three to develop a web‑based inventory management system using React and Node.js, which improved data retrieval speed by 30%. I also completed a capstone project on machine‑learning‑based sentiment analysis, where I implemented a Python pipeline that achieved 85% accuracy. Additionally, I volunteered as a coding tutor at the university’s STEM outreach program, helping high‑school students build basic Android apps. These experiences have honed my programming, teamwork, and problem‑solving skills, and I’m eager to bring that knowledge to your team.”
+
+**6. One relevant follow‑up question**  
+> “Can you walk me through one of those projects—what was your role, the challenges you faced, and how you overcame them?”",
+TC09,V3,Contextual follow-up,"**Answer Evaluation**
+
+| Criterion | Score (out of 10) | Comments |
+|-----------|-------------------|----------|
+| **Correctness** | 3/3 | The definition accurately captures the core issue of overfitting. |
+| **Relevance** | 2/2 | Directly addresses the interview question. |
+| **Clarity** | 2/2 | Concise and easy to understand. |
+| **Completeness** | 2/3 | Good definition, but could mention causes (e.g., high model complexity, insufficient data) or mitigation strategies (regularization, cross‑validation). |
+
+**Total Score:** **9/10**
+
+**Explanation of the Score**  
+Your answer correctly identifies the hallmark of overfitting: excellent performance on training data but poor generalization to new data. It is clear and directly relevant. The only area for improvement is completeness—adding a brief note on why overfitting occurs or how to detect/avoid it would round out the answer.
+
+**Strengths of the Answer**  
+- Precise definition.  
+- Clear, concise wording.  
+- Directly addresses the question.
+
+**Missing or Incorrect Points**  
+- No mention of underlying causes (e.g., model complexity, noise).  
+- No reference to detection methods (e.g., validation curves) or mitigation techniques (e.g., regularization, dropout).
+
+**Suggested Improved Answer**  
+> “Overfitting happens when a model learns the training data too well, capturing noise and idiosyncrasies rather than the underlying pattern. As a result, it performs excellently on the training set but poorly on unseen data. This typically occurs with overly complex models or insufficient training data, and can be mitigated by techniques such as regularization, cross‑validation, or early stopping.”
+
+**Follow‑up Question**  
+What are some common techniques you would use to detect and prevent overfitting in a machine‑learning pipeline?",
+TC10,V3,Scoring consistency,"**Score: 9 / 10**
+
+| Criterion | Points | Explanation |
+|-----------|--------|-------------|
+| Correctness | 3/3 | The answer correctly identifies a Python list as an ordered, mutable collection. |
+| Relevance | 2/2 | It directly addresses the question asked. |
+| Clarity | 2/2 | The statement is concise and easy to understand. |
+| Completeness | 2/3 | The answer covers the core definition but omits details such as dynamic resizing, heterogeneous element support, indexing, slicing, and common list methods. |
+
+**Explanation of the score**  
+Your response is accurate and clear, hitting the essential points. The only shortfall is that it doesn’t mention some of the practical aspects that often come up in technical interviews (e.g., how lists can hold any data type, how they grow, and typical operations). Adding a few of those details would bring the answer to full completeness.
+
+**Strengths of the answer**  
+- Precise definition of order and mutability.  
+- Concise and to the point.  
+- Uses correct terminology.
+
+**Missing or incorrect points**  
+- No mention of dynamic resizing or memory allocation.  
+- No reference to heterogeneous element types.  
+- No examples of indexing, slicing, or common list methods (`append`, `pop`, etc.).
+
+**Suggested improved answer**  
+> A Python list is an ordered, mutable sequence that can hold elements of any type. It is implemented as a dynamic array, so it automatically resizes as elements are added or removed. Lists support indexing, slicing, and a rich set of methods such as `append()`, `pop()`, `insert()`, and `remove()`. Because they are mutable, you can modify, extend, or reorder the elements after creation.
+
+**Follow‑up question**  
+What is the time complexity of accessing an element by index in a Python list, and why?","**Score: 9 / 10**
+
+| Criterion | Points | Notes |
+|-----------|--------|-------|
+| Correctness | 3/3 | The definition is factually accurate. |
+| Relevance | 2/2 | Directly answers the question. |
+| Clarity | 2/2 | Concise and easy to understand. |
+| Completeness | 2/3 | Covers core aspects but omits a few details (e.g., dynamic resizing, heterogeneous element support, indexing, slicing). |
+
+### Explanation of the Score
+Your answer correctly identifies a Python list as an ordered, mutable collection that can hold multiple elements. It is clear and directly addresses the question. The only area where it falls short is completeness: a more thorough answer would mention that lists are dynamic arrays, can store elements of any type, support indexing, slicing, and have methods like `append`, `extend`, etc.
+
+### Strengths of Your Answer
+- **Accuracy**: You captured the essential properties of a list.
+- **Clarity**: The statement is concise and easy to grasp.
+- **Relevance**: You stayed on topic without digressing.
+
+### Missing or Incorrect Points
+- **Dynamic Resizing**: Lists automatically grow as elements are added.
+- **Heterogeneous Elements**: Lists can contain items of different data types.
+- **Indexing & Slicing**: Accessing elements by index and creating sublists.
+- **Common Methods**: `append()`, `extend()`, `insert()`, `remove()`, etc.
+
+### Suggested Improved Answer
+> A Python list is an ordered, mutable sequence that can hold elements of any type. Internally, it is implemented as a dynamic array, so it automatically resizes as you add or remove items. Lists support indexing, slicing, and a rich set of methods such as `append()`, `extend()`, `insert()`, `remove()`, and `pop()`, making them versatile for many programming tasks.
+
+### Follow‑up Question
+> Can you explain how Python lists manage memory when elements are added or removed, and what impact this has on performance?"

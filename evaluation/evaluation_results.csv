@@ -1,32 +1,32 @@
-
 Test_ID,Prompt_Version,Expected_Behaviour,Actual_Output,Result,Observation
-TC01,V1,Basic Python question,,,
-TC02,V1,Relevant AI/ML question,,,
-TC03,V1,Relevant HR question,,,
-TC04,V1,One question only,,,
-TC05,V1,Recognise incomplete answer,,,
-TC06,V1,Accept valid alternative explanation,,,
-TC07,V1,Identify irrelevant answer,,,
-TC08,V1,Avoid invented experience,,,
-TC09,V1,Relevant contextual follow-up,,,
-TC10,V1,Consistent scoring,,,
-TC01,V2,Basic Python question,,,
-TC02,V2,Relevant AI/ML question,,,
-TC03,V2,Relevant HR question,,,
-TC04,V2,One question only,,,
-TC05,V2,Recognise incomplete answer,,,
-TC06,V2,Accept valid alternative explanation,,,
-TC07,V2,Identify irrelevant answer,,,
-TC08,V2,Avoid invented experience,,,
-TC09,V2,Relevant contextual follow-up,,,
-TC10,V2,Consistent scoring,,,
-TC01,V3,Basic Python question,,,
-TC02,V3,Relevant AI/ML question,,,
-TC03,V3,Relevant HR question,,,
-TC04,V3,One question only,,,
-TC05,V3,Recognise incomplete answer,,,
-TC06,V3,Accept valid alternative explanation,,,
-TC07,V3,Identify irrelevant answer,,,
-TC08,V3,Avoid invented experience,,,
-TC09,V3,Relevant contextual follow-up,,,
-TC10,V3,Consistent scoring,,,
+
+TC01,V1,Basic Python question,Array versus linked list question,FAIL,Question was not specifically Python-related.
+TC02,V1,Relevant AI/ML question,Bias and variance question,PASS,Relevant intermediate machine learning question.
+TC03,V1,Relevant HR question,Self introduction and internship motivation,PASS,Appropriate behavioural interview question.
+TC04,V1,One question only,Python coding task,PASS,Asked one coding question with an example.
+TC05,V1,Recognise incomplete answer,Identified missing ML concepts,PASS,Identified missing details and suggested an improved answer.
+TC06,V1,Accept valid alternative explanation,Accepted Python list definition,PASS,Accepted the answer but expected additional details.
+TC07,V1,Identify irrelevant answer,Recognised unrelated cricket response,PASS,Correctly identified irrelevance.
+TC08,V1,Avoid invented experience,Invented projects and achievements,FAIL,Generated fictional personal experiences.
+TC09,V1,Relevant contextual follow-up,Asked about preventing overfitting,PASS,Generated a relevant follow-up.
+TC10,V1,Consistent scoring,7/10 in both runs,PASS,Identical numerical scores across repeated runs.
+TC01,V2,Basic Python question,Variable definition and Python declaration question,PASS,Relevant beginner-level programming question with Python context.
+TC02,V2,Relevant AI/ML question,Gradient descent and learning rate question,PASS,Relevant intermediate machine learning question.
+TC03,V2,Relevant HR question,Teamwork and conflict resolution question,PASS,Appropriate behavioural interview question.
+TC04,V2,One question only,Programming functions question,PASS,Asked one question at a time.
+TC05,V2,Recognise incomplete answer,6/10 with criterion-wise evaluation,PASS,Structured rubric identified missing machine learning concepts.
+TC06,V2,Accept valid alternative explanation,9/10 for Python list definition,PASS,Accepted correct alternative explanation with detailed feedback.
+TC07,V2,Identify irrelevant answer,0/10 for cricket response,PASS,Identified irrelevant answer; minor inconsistency in clarity scoring.
+TC08,V2,Avoid invented experience,Invented lab assistant role and project experience,FAIL,Suggested fictional qualifications and achievements.
+TC09,V2,Relevant contextual follow-up,9/10 and overfitting prevention follow-up,PASS,Generated relevant contextual follow-up.
+TC10,V2,Consistent scoring,9/10 in both runs,PASS,Identical scores across repeated runs.
+TC01,V3,Basic Python question,Linked list versus array question,FAIL,Question was relevant to programming but not specifically Python.
+TC02,V3,Relevant AI/ML question,Supervised learning preprocessing and model selection,PASS,Relevant intermediate AI/ML question.
+TC03,V3,Relevant HR question,Academic or personal project experience,PASS,Appropriate behavioural question for a student.
+TC04,V3,One question only,Combined array versus linked list question,PASS,One combined interview question; no separate questions.
+TC05,V3,Recognise incomplete answer,4/10 with criterion-wise evaluation,PASS,Identified missing data model training and evaluation concepts.
+TC06,V3,Accept valid alternative explanation,8/10 for Python list definition,PASS,Accepted the correct explanation and provided improvement suggestions.
+TC07,V3,Identify irrelevant answer,0/10 for cricket response,PASS,Correctly identified irrelevant content.
+TC08,V3,Avoid invented experience,Invented projects and performance metrics,FAIL,Suggested fictional achievements and qualifications.
+TC09,V3,Relevant contextual follow-up,9/10 and overfitting prevention question,PASS,Generated a relevant follow-up based on the answer.
+TC10,V3,Consistent scoring,9/10 in both runs,PASS,Identical scores across repeated runs.
