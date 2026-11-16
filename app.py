@@ -1,19 +1,39 @@
+
 import os
+from pathlib import Path
+
 import streamlit as st
 from dotenv import load_dotenv
 from groq import Groq
 
-# Load environment variables
-load_dotenv()
+
+# ============================================================
+# 1. CONFIGURATION
+# ============================================================
+
+ROOT = Path(__file__).resolve().parent
+
+load_dotenv(ROOT / ".env")
 
 API_KEY = os.getenv("GROQ_API_KEY")
 MODEL = os.getenv("GROQ_MODEL") or os.getenv("MODEL")
+
+PROMPT_FILES = {
+    "V1": ROOT / "prompts" / "baseline_v1.txt",
+    "V2": ROOT / "prompts" / "improved_v2.txt",
+    "V3": ROOT / "prompts" / "improved_v3.txt",
+}
 
 st.set_page_config(
     page_title="AI Mock Interviewer",
     page_icon="🎯",
     layout="wide"
 )
+
+
+# ============================================================
+# 2. API VALIDATION
+# ============================================================
 
 st.title("🎯 AI Mock Interviewer")
 st.caption("Practice interviews. Improve your answers. Build confidence.")
@@ -23,48 +43,163 @@ if not API_KEY:
     st.stop()
 
 if not MODEL:
-    st.error(
-        "Model name not found. Add GROQ_MODEL=your_model_name "
-        "to your .env file, using the model name you configured."
-    )
+    st.error("GROQ_MODEL is missing from your .env file.")
     st.stop()
 
 client = Groq(api_key=API_KEY)
 
 
+# ============================================================
+# 3. PROMPT MANAGEMENT
+# ============================================================
+
+def load_prompt(version):
+    """Load the selected prompt from the prompts directory."""
+
+    if version not in PROMPT_FILES:
+        raise ValueError(f"Invalid prompt version: {version}")
+
+    prompt_path = PROMPT_FILES[version]
+
+    if not prompt_path.exists():
+        raise FileNotFoundError(
+            f"Prompt file not found: {prompt_path}"
+        )
+
+    return prompt_path.read_text(encoding="utf-8")
+
+
+def build_system_prompt(version, stage):
+    """
+    Combine the selected experimental prompt with
+    instructions specific to the current interview stage.
+    """
+
+    base_prompt = load_prompt(version)
+
+    stage_instructions = {
+
+        "question": """
+INTERVIEW STAGE: INITIAL QUESTION GENERATION
+
+Your task in this stage is ONLY to generate the first
+interview question.
+
+Instructions:
+1. Generate exactly ONE interview question.
+2. Consider the interview type, target role and experience level.
+3. Make the question relevant to the selected role.
+4. Match its difficulty to the candidate's experience.
+5. Do not evaluate an answer.
+6. Do not provide a suggested answer.
+7. Do not generate multiple questions.
+
+Return only the interview question.
+""",
+
+        "evaluation": """
+INTERVIEW STAGE: ANSWER EVALUATION
+
+Your task in this stage is ONLY to evaluate the
+candidate's submitted answer.
+
+Instructions:
+1. Evaluate correctness, relevance, clarity and completeness.
+2. Accept valid alternative explanations.
+3. Do not penalize candidates for using different wording.
+4. Never invent qualifications, projects or experience.
+5. Do not assume information that the candidate has not provided.
+6. Give a score out of 10 with a clear justification.
+7. Provide constructive and specific feedback.
+
+Return the following sections:
+
+SCORE: Score out of 10.
+
+JUSTIFICATION: Explain the score.
+
+STRENGTHS: Explain what the candidate did well.
+
+IMPROVEMENTS: Explain missing or incorrect concepts.
+
+SUGGESTED ANSWER: Provide an example of a stronger answer.
+
+Do not ask another interview question in this stage.
+""",
+
+        "next_question": """
+INTERVIEW STAGE: NEXT QUESTION GENERATION
+
+Your task in this stage is ONLY to generate the next
+interview question.
+
+Instructions:
+1. Ask exactly ONE new interview question.
+2. Consider the previous question and candidate's answer.
+3. Use previous feedback to guide the next question.
+4. Adapt difficulty to the candidate's demonstrated understanding.
+5. Maintain relevance to the selected interview type and role.
+6. Avoid repeating previous questions.
+7. Do not evaluate the previous answer again.
+8. Do not provide the answer.
+
+Return only the next interview question.
+"""
+    }
+
+    if stage not in stage_instructions:
+        raise ValueError(f"Invalid interview stage: {stage}")
+
+    return (
+        base_prompt
+        + "\n\nIMPORTANT: The following stage-specific "
+        "instructions take priority over conflicting "
+        "instructions above.\n\n"
+        + stage_instructions[stage]
+    )
+
+
+# ============================================================
+# 4. GROQ API FUNCTION
+# ============================================================
+
 def ask_ai(messages):
-    """Send messages to Groq and return the model response."""
+    """Send conversation messages to Groq."""
+
     response = client.chat.completions.create(
         model=MODEL,
         messages=messages,
         temperature=0.5,
         max_tokens=1200
     )
+
     return response.choices[0].message.content.strip()
 
 
-# Initialize interview state
-if "started" not in st.session_state:
-    st.session_state.started = False
+# ============================================================
+# 5. SESSION STATE INITIALIZATION
+# ============================================================
 
-if "questions" not in st.session_state:
-    st.session_state.questions = []
+DEFAULTS = {
+    "started": False,
+    "questions": [],
+    "answers": [],
+    "feedback": [],
+    "current_question": "",
+    "interview_config": {}
+}
 
-if "answers" not in st.session_state:
-    st.session_state.answers = []
-
-if "feedback" not in st.session_state:
-    st.session_state.feedback = []
-
-if "current_question" not in st.session_state:
-    st.session_state.current_question = ""
-
-if "interview_config" not in st.session_state:
-    st.session_state.interview_config = {}
+for key, value in DEFAULTS.items():
+    if key not in st.session_state:
+        st.session_state[key] = value.copy() if isinstance(value, list) else value
 
 
-# Sidebar: interview configuration
+# ============================================================
+# 6. SIDEBAR - INTERVIEW CONFIGURATION
+# ============================================================
+
 with st.sidebar:
+
     st.header("Interview Setup")
 
     interview_type = st.selectbox(
@@ -94,6 +229,16 @@ with st.sidebar:
         value=5
     )
 
+    prompt_version = st.selectbox(
+        "AI Interviewer Version",
+        ["V1", "V2", "V3"],
+        index=1
+    )
+
+    st.caption(
+        "V1: Baseline | V2: Rubric-based | V3: Adaptive"
+    )
+
     start_button = st.button(
         "Start Interview",
         type="primary",
@@ -106,22 +251,34 @@ with st.sidebar:
     )
 
 
+# ============================================================
+# 7. RESET INTERVIEW
+# ============================================================
+
 if reset_button:
-    for key in [
-        "started",
-        "questions",
-        "answers",
-        "feedback",
-        "current_question",
-        "interview_config"
-    ]:
-        st.session_state.pop(key, None)
+
+    for key, value in DEFAULTS.items():
+        st.session_state[key] = (
+            value.copy() if isinstance(value, list) else value
+        )
 
     st.rerun()
 
 
-# Start a new interview
+# ============================================================
+# 8. START INTERVIEW
+# ============================================================
+
 if start_button:
+
+    # Verify prompt file before starting.
+    try:
+        load_prompt(prompt_version)
+
+    except Exception as error:
+        st.error(f"Prompt loading failed: {error}")
+        st.stop()
+
     st.session_state.started = False
     st.session_state.questions = []
     st.session_state.answers = []
@@ -132,19 +289,20 @@ if start_button:
         "type": interview_type,
         "role": role,
         "experience": experience,
-        "total": total_questions
+        "total": total_questions,
+        "prompt_version": prompt_version
     }
 
     with st.spinner("Preparing your first interview question..."):
+
         try:
+
             question = ask_ai([
                 {
                     "role": "system",
-                    "content": (
-                        "You are a professional mock interviewer. "
-                        "Ask one clear interview question at a time. "
-                        "Do not provide the answer or evaluation yet. "
-                        "Avoid asking multiple questions in one turn."
+                    "content": build_system_prompt(
+                        prompt_version,
+                        "question"
                     )
                 },
                 {
@@ -153,24 +311,29 @@ if start_button:
                         f"Interview type: {interview_type}\n"
                         f"Target role: {role}\n"
                         f"Experience level: {experience}\n"
-                        "Generate the first appropriate interview question."
+                        "Generate the first interview question."
                     )
                 }
             ])
 
             st.session_state.current_question = question
+            st.session_state.questions.append(question)
             st.session_state.started = True
+
             st.rerun()
 
-        except Exception as e:
-            st.error(
-                f"Could not connect to the AI service: {e}"
-            )
+        except Exception as error:
+            st.error(f"Could not start interview: {error}")
 
 
-# Interview interface
+# ============================================================
+# 9. INTERVIEW INTERFACE
+# ============================================================
+
 if st.session_state.started:
+
     config = st.session_state.interview_config
+
     completed = len(st.session_state.answers)
     total = config["total"]
 
@@ -178,17 +341,18 @@ if st.session_state.started:
         f"{config['type']} Interview — {config['role']}"
     )
 
+    st.caption(
+        f"Prompt Version: {config['prompt_version']}"
+    )
+
     st.progress(completed / total)
 
-    st.write(
-        f"**Question {completed + 1} of {total}**"
-    )
+    st.write(f"**Question {completed + 1} of {total}**")
 
     st.info(st.session_state.current_question)
 
-    with st.form(
-        key=f"answer_form_{completed}"
-    ):
+    with st.form(key=f"answer_form_{completed}"):
+
         answer = st.text_area(
             "Your Answer",
             placeholder="Type your answer here...",
@@ -201,36 +365,28 @@ if st.session_state.started:
         )
 
     if submitted:
+
         if not answer.strip():
+
             st.warning("Please enter an answer first.")
 
         else:
+
             with st.spinner("Evaluating your answer..."):
+
                 try:
+
+                    # ----------------------------------------
+                    # 9A. EVALUATE CANDIDATE ANSWER
+                    # ----------------------------------------
+
                     evaluation = ask_ai([
                         {
                             "role": "system",
-                            "content": """
-You are a fair and constructive interview evaluator.
-
-Evaluate the candidate's answer based on correctness,
-relevance, clarity, and completeness.
-
-Accept valid alternative explanations.
-Do not invent facts about the candidate.
-
-Return these sections:
-
-SCORE: Give a score from 0 to 10.
-
-STRENGTHS: Explain what was done well.
-
-IMPROVEMENTS: Explain what is missing or incorrect.
-
-SUGGESTED ANSWER: Give an example of a stronger answer.
-
-Keep the feedback specific and constructive.
-"""
+                            "content": build_system_prompt(
+                                config["prompt_version"],
+                                "evaluation"
+                            )
                         },
                         {
                             "role": "user",
@@ -238,35 +394,34 @@ Keep the feedback specific and constructive.
                                 f"Interview type: {config['type']}\n"
                                 f"Target role: {config['role']}\n"
                                 f"Experience: {config['experience']}\n"
-                                f"Question: "
-                                f"{st.session_state.current_question}\n"
+                                f"Question: {st.session_state.current_question}\n"
                                 f"Candidate's answer: {answer}"
                             )
                         }
                     ])
 
-                    st.session_state.answers.append({
-                        "question": (
-                            st.session_state.current_question
-                        ),
-                        "answer": answer
-                    })
+                    # Generate next question before saving
+                    # so a failed API request doesn't duplicate
+                    # the submitted answer on retry.
 
-                    st.session_state.feedback.append(evaluation)
+                    next_question = None
 
-                    if len(st.session_state.answers) < total:
+                    # ----------------------------------------
+                    # 9B. GENERATE NEXT QUESTION
+                    # ----------------------------------------
+
+                    if completed + 1 < total:
+
                         with st.spinner(
                             "Preparing your next question..."
                         ):
+
                             next_question = ask_ai([
                                 {
                                     "role": "system",
-                                    "content": (
-                                        "You are a professional interviewer. "
-                                        "Ask exactly one new interview "
-                                        "question. Adapt its difficulty "
-                                        "to the candidate's previous "
-                                        "answer. Do not give the answer."
+                                    "content": build_system_prompt(
+                                        config["prompt_version"],
+                                        "next_question"
                                     )
                                 },
                                 {
@@ -274,55 +429,91 @@ Keep the feedback specific and constructive.
                                     "content": (
                                         f"Interview type: {config['type']}\n"
                                         f"Target role: {config['role']}\n"
-                                        f"Experience level: "
-                                        f"{config['experience']}\n"
+                                        f"Experience: {config['experience']}\n"
                                         f"Previous question: "
                                         f"{st.session_state.current_question}\n"
                                         f"Previous answer: {answer}\n"
                                         f"Previous feedback: {evaluation}\n"
-                                        "Ask the next relevant question. "
-                                        "Avoid repeating the previous one."
+                                        "Generate the next relevant question."
                                     )
                                 }
                             ])
 
-                            st.session_state.current_question = (
-                                next_question
-                            )
+                    # ----------------------------------------
+                    # 9C. SAVE INTERVIEW DATA
+                    # ----------------------------------------
+
+                    st.session_state.answers.append({
+                        "question": st.session_state.current_question,
+                        "answer": answer
+                    })
+
+                    st.session_state.feedback.append(evaluation)
+
+                    if next_question:
+
+                        st.session_state.current_question = next_question
+
+                        st.session_state.questions.append(
+                            next_question
+                        )
 
                     else:
+
                         st.session_state.started = False
 
                     st.rerun()
 
-                except Exception as e:
+                except Exception as error:
+
                     st.error(
-                        f"Something went wrong: {e}"
+                        f"Something went wrong: {error}"
                     )
 
 
-# Display completed interview results
+# ============================================================
+# 10. DISPLAY INTERVIEW RESULTS
+# ============================================================
+
 if (
     not st.session_state.started
     and len(st.session_state.answers) > 0
 ):
-    if (
-        len(st.session_state.answers)
-        == st.session_state.interview_config.get("total", 0)
-    ):
+
+    config = st.session_state.interview_config
+
+    if len(st.session_state.answers) == config.get("total", 0):
+
         st.success("🎉 Interview completed!")
 
     st.header("📊 Interview Feedback")
 
+    st.write(
+        f"**Interview Type:** {config.get('type', '')}"
+    )
+
+    st.write(
+        f"**Target Role:** {config.get('role', '')}"
+    )
+
+    st.write(
+        f"**Prompt Version:** {config.get('prompt_version', '')}"
+    )
+
     for i, item in enumerate(st.session_state.answers):
+
         with st.expander(
             f"Question {i + 1}: {item['question']}"
         ):
+
             st.write("**Your Answer**")
             st.write(item["answer"])
 
             st.write("**AI Evaluation**")
-            st.markdown(st.session_state.feedback[i])
+
+            st.markdown(
+                st.session_state.feedback[i]
+            )
 
     st.info(
         "Review your feedback to identify areas for improvement. "
@@ -330,18 +521,25 @@ if (
         "of interview performance."
     )
 
+
+# ============================================================
+# 11. HOME PAGE
+# ============================================================
+
 elif not st.session_state.started:
+
     st.markdown(
         """
         ### How it works
 
         1. Select your interview type and target role.
-        2. Start your interview.
-        3. Answer each question.
-        4. Receive AI-generated feedback.
-        5. Review your results and improve.
+        2. Choose your preferred AI prompt version.
+        3. Start your interview.
+        4. Answer each question.
+        5. Receive AI-generated feedback.
+        6. Review your results and improve.
 
-        **Ready?** Configure your interview in the sidebar and
-        click **Start Interview**.
+        **Ready?** Configure your interview in the sidebar
+        and click **Start Interview**.
         """
     )
